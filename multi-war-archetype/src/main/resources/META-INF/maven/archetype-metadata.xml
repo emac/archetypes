@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="multi-war-parent"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <fileSets>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.gitignore</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <modules>
+    <module id="${rootArtifactId}-core" dir="__rootArtifactId__-core" name="${rootArtifactId}-core">
+    </module>
+    <module id="${rootArtifactId}-dal" dir="__rootArtifactId__-dal" name="${rootArtifactId}-dal">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.xml</include>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-mvc" dir="__rootArtifactId__-mvc" name="${rootArtifactId}-mvc">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.xml</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-admin" dir="__rootArtifactId__-admin" name="${rootArtifactId}-admin">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**/*.jsp</include>
+            <include>**/*.xml</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-weixin" dir="__rootArtifactId__-weixin" name="${rootArtifactId}-weixin">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**/*.jsp</include>
+            <include>**/*.xml</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-all" dir="__rootArtifactId__-all" name="${rootArtifactId}-all">
+      <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/webapp</directory>
+          <includes>
+            <include>**/*.jsp</include>
+            <include>**/*.xml</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+  </modules>
+</archetype-descriptor>

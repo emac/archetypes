@@ -1,0 +1,14 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+target/
+*.class
+.settings/
+.project
+.classpath
+.svn/
+.idea/
+*.iml
+/log
+/${rootArtifactId}-admin/log
+/${rootArtifactId}-wap/log

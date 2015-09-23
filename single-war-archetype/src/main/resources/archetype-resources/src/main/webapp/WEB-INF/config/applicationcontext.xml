@@ -1,0 +1,82 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+  <context:component-scan base-package="com.vcooline.${artifactId}" >
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+  </context:component-scan>
+  
+  <!-- datasource and transaction -->
+  <context:property-placeholder location="/WEB-INF/config/database.properties" />
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    destroy-method="close">
+    <!-- 数据源驱动 -->
+    <property name="driverClassName">
+      <value>${symbol_dollar}{drivername}</value>
+    </property>
+    <!-- 数据源连接 -->
+    <property name="url">
+      <value>${symbol_dollar}{dburl}</value>
+    </property>
+    <!-- 登录用户 -->
+    <property name="username">
+      <value>${symbol_dollar}{username}</value>
+    </property>
+    <!-- 登录密码 -->
+    <property name="password">
+      <value>${symbol_dollar}{password}</value>
+    </property>
+    <!--initialSize: 初始化连接 -->
+    <property name="initialSize" value="5" />
+    <!--maxIdle: 最大空闲连接 -->
+    <property name="maxIdle" value="10" />
+    <!--minIdle: 最小空闲连接 -->
+    <property name="minIdle" value="5" />
+    <!--maxActive: 最大连接数量 -->
+    <property name="maxActive" value="15" />
+    <!--removeAbandoned: 是否自动回收超时连接 -->
+    <property name="removeAbandoned" value="true" />
+    <!--removeAbandonedTimeout: 超时时间(以秒数为单位) -->
+    <property name="removeAbandonedTimeout" value="180" />
+    <!--maxWait: 超时等待时间以毫秒为单位 6000毫秒/1000等于60秒 -->
+    <property name="maxWait" value="3000" />
+    <property name="logAbandoned" value="true" />
+    <property name="validationQuery">
+      <value>SELECT 1</value>
+    </property>
+    <property name="testOnBorrow">
+      <value>true</value>
+    </property>
+  </bean>
+  <bean id="txManager"
+    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+  <tx:annotation-driven transaction-manager="txManager" />
+  
+  <!-- mybatis -->
+  <!--
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+    <property name="typeAliasesPackage" value="com.vcooline.${artifactId}.dal.model"></property>
+    <property name="mapperLocations" value="classpath*:com/vcooline/${artifactId}/dal/dao/mapping/*.xml"></property>
+  </bean>
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    <property name="basePackage" value="com.vcooline.${artifactId}.dal.dao"></property>
+  </bean>
+  -->
+</beans>
